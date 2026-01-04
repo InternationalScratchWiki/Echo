@@ -1102,6 +1102,18 @@ abstract class DiscussionParser {
 			}
 		}
 
+		// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		// HACK: Also find <scratchsig> tags and {{User:Username/sig...}} templates
+		// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		preg_match_all('%<scratchsig>(.*?)</scratchsig>%', $line, $matches);
+		foreach ($matches[1] as $username) {
+			$usernames[] = User::newFromName( $username )->getName();
+		}
+		preg_match_all('%\{\{[Uu]ser:([^/}]+)/(?i)sig[^}]*\}\}%', $line, $matches);
+		foreach ($matches[1] as $username) {
+			$usernames[] = User::newFromName( $username )->getName();
+		}
+
 		return $usernames;
 	}
 
