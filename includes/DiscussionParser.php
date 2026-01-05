@@ -1109,7 +1109,7 @@ abstract class DiscussionParser {
 		foreach ($matches[1] as $username) {
 			$usernames[] = User::newFromName( $username )->getName();
 		}
-		preg_match_all('%\{\{[Uu]ser:([^/}]+)/(?i)sig[^}]*\}\}%', $line, $matches);
+		preg_match_all('%\{\{[Uu]ser:([^/}]+)/(?i)[Ss]ig[^}]*\}\}%', $line, $matches);
 		foreach ($matches[1] as $username) {
 			$usernames[] = User::newFromName( $username )->getName();
 		}
